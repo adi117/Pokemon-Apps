@@ -22,7 +22,7 @@ const PokemonDetail: FC = () => {
     const [filter, setFilter] = useState("id");
     const [grid, setGrid] = useState("single");
     const [query, setQuery] = useState('');
-    const { pokemonDetails, loading, error } = getAllPokemonDetails();
+    const { pokemonDetails} = getAllPokemonDetails();
     const [sortedPokemon, setSortedPokemon] = useState<PokemonDetails[]>([]);
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, useEffect } from "react";
+import { FC, useState, useMemo} from "react";
 import Logo from "../../assets/logo.webp"
 import SearchIcon from "@/assets/magnifier.svg"
 import { cn } from "@/utils/cn";
@@ -44,7 +44,7 @@ const Header : FC<SearchQuery> = ({setQuery, query}) => {
                 placeholder="Search..."
                 className={cn("bg-white rounded-lg px-3 py-1 text-sm max-w-36 border-[1px] border-[#3D4466]", searchMenu === "box" ? "block" : "hidden")}
                 value={query}
-                onChange={(e) => handleInputChange(e.target.value)}
+                onChange={(e) => debounceQuery(e.target.value)}
                 />
             </div>
         </div>
