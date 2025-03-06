@@ -6,6 +6,7 @@ interface Pokemon {
 }
 
 const usePokemonList = () => {
+  
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>(null);
@@ -13,7 +14,7 @@ const usePokemonList = () => {
   useEffect(() => {
     const fetchPokemonList = async () => {
       try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=4");
         if (!response.ok) {
           throw new Error("Failed to fetch Pokémon.");
         }

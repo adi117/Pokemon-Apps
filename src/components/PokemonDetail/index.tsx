@@ -21,11 +21,12 @@ const PokemonDetail: FC = () => {
 
     const [filter, setFilter] = useState("id");
     const [grid, setGrid] = useState("single");
+    const [query, setQuery] = useState('');
     const { pokemonDetails, loading, error } = getAllPokemonDetails();
     const [sortedPokemon, setSortedPokemon] = useState<PokemonDetails[]>([]);
 
     useEffect(() => {
-        const allPokemonList = [...pokemonDetails].sort((a, z) => {
+        let allPokemonList = [...pokemonDetails].sort((a, z) => {
             switch (filter) {
                 case "name":
                     return a.name.localeCompare(z.name);
@@ -41,14 +42,20 @@ const PokemonDetail: FC = () => {
                     return a.id - z.id;
             }
         });
+
+        if (query) {
+            allPokemonList = allPokemonList.filter((item) => {
+                return Object.values(item).join('').toLocaleLowerCase().includes(query.toLowerCase());
+            })
+        }
         setSortedPokemon(allPokemonList);
-    }, [filter]);
+    }, [filter, pokemonDetails, query]);
 
 
     return (
         <div className="flex-col justify-center items-center">
             <div>
-                <Header></Header>
+                <Header setQuery={setQuery} query={query}/>
             </div>
             <div className="flex w-full gap-6 px-6 py-4">
                 <Dropdown setFilter={setFilter} filter={filter} />

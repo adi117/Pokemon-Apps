@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import usePokemonDetails from "./usePokemonDetail";
+import { useEffect, useRef, useState } from "react";
 import usePokemonList from "./usePokemonList";
 
 interface PokemonDetails {
@@ -21,6 +20,10 @@ const getAllPokemonDetails = () => {
     const [error, setError] = useState<any>(null);
 
     useEffect(() => {
+
+        if (listLoading || listError || pokemonList.length === 0) {
+            return;
+        }
         const fetchPokemonDetails = async () => {
             try {
                 const detailsPokemon = await Promise.all(pokemonList.map(async (pokemon) => {
@@ -48,6 +51,7 @@ const getAllPokemonDetails = () => {
             }
         }
         fetchPokemonDetails();
+        console.log(pokemonList);
     }, [pokemonList]);
 
     return {pokemonDetails, loading, error}
